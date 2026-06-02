@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marco Zero — Sobre Rodas Motos | Vórtice Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #161616;
+    --green: #00ff88;
+    --orange: #f5820a;
+    --white: #f0f0f0;
+    --muted: #555;
+    --muted2: #777;
+    --red: #ff4444;
+    --yellow: #ffcc00;
+    --blue: #88aaff;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.11);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+  /* ====== HEADER ====== */
+  .header {
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--border2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,255,136,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .agency-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .agency-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .agency-name span { color: var(--green); }
+
+  .doc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  .header-title span { color: var(--orange); }
+
+  .header-client {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted2);
+    margin-bottom: 24px;
+  }
+
+  .header-info {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: rgba(240,240,240,0.65);
+    line-height: 1.7;
+  }
+
+  .header-info strong { color: var(--white); }
+
+  /* ====== PROGRESS BAR ====== */
+  .progress-wrap {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    margin-bottom: 8px;
+  }
+
+  .progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: var(--border2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* ====== SECTIONS ====== */
+  .form-section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.18);
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* ====== FIELDS ====== */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .field-grid.single { grid-template-columns: 1fr; }
+
+  @media (max-width: 560px) { .field-grid { grid-template-columns: 1fr; } }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  label .required { color: var(--orange); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="url"],
+  select,
+  textarea {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    padding: 12px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+    appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(0,255,136,0.4);
+    box-shadow: 0 0 0 3px rgba(0,255,136,0.06);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  select option { background: #161616; color: var(--white); }
+
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  /* ====== ALERT BOX ====== */
+  .alert-box {
+    display: flex;
+    gap: 14px;
+    background: rgba(245,130,10,0.06);
+    border: 1px solid rgba(245,130,10,0.2);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 20px 0 0;
+    font-size: 13px;
+    color: rgba(240,240,240,0.7);
+    line-height: 1.65;
+  }
+
+  .alert-box .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .alert-box strong { color: var(--orange); }
+
+  .info-box {
+    display: flex;
+    gap: 14px;
+    background: rgba(0,255,136,0.04);
+    border: 1px solid rgba(0,255,136,0.14);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 20px 0 0;
+    font-size: 13px;
+    color: rgba(240,240,240,0.7);
+    line-height: 1.65;
+  }
+
+  .info-box .alert-icon { font-size: 18px; flex-shrink: 0; }
+  .info-box strong { color: var(--green); }
+
+  /* ====== RADIO / CHECK GROUP ====== */
+  .radio-group, .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .radio-group label, .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: rgba(240,240,240,0.7);
+    text-transform: none;
+    letter-spacing: normal;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .radio-group input[type="radio"],
+  .check-group input[type="checkbox"] {
+    width: auto;
+    accent-color: var(--green);
+  }
+
+  .radio-group label:has(input:checked),
+  .check-group label:has(input:checked) {
+    border-color: rgba(0,255,136,0.35);
+    background: rgba(0,255,136,0.06);
+    color: var(--white);
+  }
+
+  /* ====== SUBMIT ====== */
+  .submit-section {
+    padding: 48px 0 64px;
+  }
+
+  .submit-note {
+    font-size: 13px;
+    color: var(--muted2);
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+
+  .submit-note strong { color: var(--white); }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: #0a0a0a;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 16px 36px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 32px rgba(0,255,136,0.18);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 48px rgba(0,255,136,0.3);
+  }
+
+  /* SUCCESS STATE */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .success-icon { font-size: 56px; margin-bottom: 20px; }
+
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  .success-sub { font-size: 15px; color: var(--muted2); line-height: 1.7; }
+
+  /* ====== FOOTER ====== */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  footer span { color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="agency-row">
+      <div class="agency-name">VÓRTICE<span>.</span>DIGITAL</div>
+      <div class="doc-tag">// MARCO ZERO · ONBOARDING</div>
+    </div>
+    <div class="header-eyebrow">// Documento de início de contrato</div>
+    <h1 class="header-title">Marco<br><span>Zero</span></h1>
+    <p class="header-client">Sobre Rodas Motos · Responsável: Rômulo</p>
+    <div class="header-info">
+      Olá, Rômulo! 👋 Para darmos o play com tudo certo, preciso que você preencha esse formulário com as informações da <strong>Sobre Rodas Motos</strong>. São os dados que a Vórtice Digital precisa para configurar toda a estrutura do Meta Ads, acessar as contas e colocar a primeira campanha no ar. <strong>Prazo sugerido: 48h após o fechamento do contrato.</strong> Qualquer dúvida, me chama no WhatsApp.
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progresso do formulário</span>
+      <span id="progress-pct">0% preenchido</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <form id="marco-zero" novalidate>
+    <input type="hidden" name="access_key" value="5fc83499-6afb-4221-8892-2eb51c28a8fa">
+    <input type="hidden" name="subject" value="📋 Marco Zero — Sobre Rodas Motos (Rômulo)">
+    <input type="hidden" name="from_name" value="Vórtice Digital — Marco Zero">
+    <input type="checkbox" name="botcheck" style="display:none">
+
+    <!-- ====== 01 DADOS DA EMPRESA ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 01</span>
+        <span class="section-title">Dados da Empresa</span>
+      </div>
+      <div class="field-grid">
+        <div class="field-group">
+          <label>Nome da empresa <span class="required">*</span></label>
+          <input type="text" name="Nome da empresa" placeholder="Sobre Rodas Motos" required data-track>
+        </div>
+        <div class="field-group">
+          <label>Nome do responsável <span class="required">*</span></label>
+          <input type="text" name="Nome do responsável" placeholder="Rômulo" required data-track>
+        </div>
+        <div class="field-group">
+          <label>WhatsApp (principal) <span class="required">*</span></label>
+          <input type="tel" name="WhatsApp" placeholder="(99) 9 9999-9999" required data-track>
+        </div>
+        <div class="field-group">
+          <label>E-mail de contato</label>
+          <input type="email" name="E-mail de contato" placeholder="seu@email.com" data-track>
+        </div>
+        <div class="field-group">
+          <label>Endereço completo da loja <span class="required">*</span></label>
+          <input type="text" name="Endereço da loja" placeholder="Av. Contorno, Centro — Balsas, MA" required data-track>
+        </div>
+        <div class="field-group">
+          <label>CNPJ</label>
+          <input type="text" name="CNPJ" placeholder="00.000.000/0001-00" data-track>
+        </div>
+        <div class="field-group full">
+          <label>Horário de funcionamento</label>
+          <input type="text" name="Horário de funcionamento" placeholder="Segunda a sexta: 7h30–19h30 | Sábado: ..." data-track>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 02 REDES SOCIAIS ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 02</span>
+        <span class="section-title">Redes Sociais</span>
+      </div>
+      <div class="field-grid">
+        <div class="field-group">
+          <label>Instagram (@ do perfil) <span class="required">*</span></label>
+          <input type="text" name="Instagram" placeholder="@sobrerodas_motors" required data-track>
+        </div>
+        <div class="field-group">
+          <label>Facebook (nome da página)</label>
+          <input type="text" name="Facebook" placeholder="Nome ou link da página" data-track>
+        </div>
+
+        <!-- LOGIN INSTAGRAM -->
+        <div class="field-group">
+          <label>E-mail ou telefone de login — Instagram <span class="required">*</span></label>
+          <input type="text" name="Login Instagram" placeholder="E-mail ou número usado para logar" required data-track>
+        </div>
+        <div class="field-group">
+          <label>Senha — Instagram <span class="required">*</span></label>
+          <input type="text" name="Senha Instagram" placeholder="Sua senha do Instagram" required data-track>
+        </div>
+
+        <!-- LOGIN FACEBOOK -->
+        <div class="field-group">
+          <label>E-mail ou telefone de login — Facebook <span class="required">*</span></label>
+          <input type="text" name="Login Facebook" placeholder="E-mail ou número usado para logar" required data-track>
+        </div>
+        <div class="field-group">
+          <label>Senha — Facebook <span class="required">*</span></label>
+          <input type="text" name="Senha Facebook" placeholder="Sua senha do Facebook" required data-track>
+        </div>
+      </div>
+
+      <div class="alert-box" style="margin-top:20px;">
+        <span class="alert-icon">🔒</span>
+        <div>
+          <strong>Segurança:</strong> Suas credenciais são usadas exclusivamente pela Vórtice Digital para configurar o Pixel, o Business Manager e as campanhas. As informações ficam restritas ao Rogério e não são compartilhadas com terceiros. Após o setup, recomendamos que você <strong>altere suas senhas</strong> e adicione a Vórtice como administrador pelo próprio painel do Meta — assim você mantém controle total da conta.
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 03 META ADS / BUSINESS MANAGER ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 03</span>
+        <span class="section-title">Meta Ads & Business Manager</span>
+      </div>
+      <div class="field-grid">
+        <div class="field-group full">
+          <label>Tem conta no Meta Business Manager? <span class="required">*</span></label>
+          <div class="radio-group">
+            <label><input type="radio" name="Business Manager" value="Sim, já tenho" data-track> Sim, já tenho</label>
+            <label><input type="radio" name="Business Manager" value="Não tenho" data-track> Não tenho</label>
+            <label><input type="radio" name="Business Manager" value="Não sei o que é" data-track> Não sei o que é</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>E-mail da conta Business (se tiver)</label>
+          <input type="email" name="E-mail Business Manager" placeholder="email@usado.no.business" data-track>
+        </div>
+        <div class="field-group">
+          <label>ID do Business Manager (se souber)</label>
+          <input type="text" name="ID Business Manager" placeholder="Ex: 123456789012345" data-track>
+        </div>
+        <div class="field-group full">
+          <label>Tem Pixel do Meta instalado? <span class="required">*</span></label>
+          <div class="radio-group">
+            <label><input type="radio" name="Pixel Meta" value="Sim" data-track> Sim</label>
+            <label><input type="radio" name="Pixel Meta" value="Não" data-track> Não</label>
+            <label><input type="radio" name="Pixel Meta" value="Não sei" data-track> Não sei</label>
+          </div>
+        </div>
+        <div class="field-group full">
+          <label>Já rodou anúncios antes? <span class="required">*</span></label>
+          <div class="radio-group">
+            <label><input type="radio" name="Anúncios anteriores" value="Sim, já rodei" data-track> Sim, já rodei</label>
+            <label><input type="radio" name="Anúncios anteriores" value="Só impulsionei pelo app" data-track> Só impulsionei pelo app</label>
+            <label><input type="radio" name="Anúncios anteriores" value="Nunca" data-track> Nunca</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Orçamento mensal para anúncios (verba de mídia) <span class="required">*</span></label>
+          <input type="text" name="Orçamento mensal anúncios" placeholder="R$ 250,00 a R$ 350,00" required data-track>
+        </div>
+        <div class="field-group">
+          <label>Forma de pagamento dos anúncios</label>
+          <select name="Forma de pagamento anúncios" data-track>
+            <option value="">Selecione...</option>
+            <option>Cartão de crédito próprio</option>
+            <option>Cartão de débito</option>
+            <option>A definir</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <span class="alert-icon">📌</span>
+        <div>
+          <strong>Ação necessária:</strong> Acesse <strong>business.facebook.com</strong> → Configurações → Pessoas → Adicionar pessoa → digite <strong>vorticedigital.ag@gmail.com</strong> → função: Administrador. Se não conseguir, me manda print que te guio pelo WhatsApp.
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 04 PRODUTO / NEGÓCIO ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 04</span>
+        <span class="section-title">Sobre o Negócio</span>
+      </div>
+      <div class="field-grid single">
+        <div class="field-group">
+          <label>O que você vende / quais são os principais produtos ou serviços? <span class="required">*</span></label>
+          <textarea name="Produtos e serviços" placeholder="Ex: Compra, venda, troca de motos. Avaliação de motos. Consórcio. Financiamento em até 48x..." required data-track></textarea>
+        </div>
+        <div class="field-group">
+          <label>Qual é o ticket médio de uma venda? (valor médio por moto vendida)</label>
+          <input type="text" name="Ticket médio" placeholder="Ex: R$ 8.000 a R$ 25.000" data-track>
+        </div>
+        <div class="field-group">
+          <label>Quem é o seu cliente ideal? (perfil, faixa etária, onde mora)</label>
+          <textarea name="Cliente ideal" placeholder="Ex: Homens e mulheres de 20 a 50 anos, em Balsas e região, que querem comprar moto nova ou usada com financiamento..." data-track></textarea>
+        </div>
+        <div class="field-group">
+          <label>Qual resultado você espera nos próximos 90 dias? <span class="required">*</span></label>
+          <textarea name="Resultado esperado 90 dias" placeholder="Ex: Quero que mais pessoas em Balsas me conheçam e venham visitar a loja. Quero fechar pelo menos X vendas..." required data-track></textarea>
+        </div>
+        <div class="field-group">
+          <label>Tem concorrentes diretos em Balsas que você identifica?</label>
+          <input type="text" name="Concorrentes" placeholder="Nome das lojas concorrentes (se souber)" data-track>
+        </div>
+        <div class="field-group">
+          <label>Tem site ou página de vendas?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="has_site" value="Sim" data-track> Sim</label>
+            <label><input type="radio" name="has_site" value="Não" data-track> Não</label>
+          </div>
+        </div>
+        <div class="field-group" id="site-field" style="display:none;">
+          <label>Link do site</label>
+          <input type="url" name="Link do site" placeholder="https://..." data-track>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 05 CONTEÚDO ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 05</span>
+        <span class="section-title">Conteúdo & Criativos</span>
+      </div>
+      <div class="field-grid single">
+        <div class="field-group">
+          <label>Você tem fotos e vídeos dos produtos disponíveis?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Mídia disponível" value="Sim, tenho vários" data-track> Sim, tenho vários</label>
+            <label><input type="radio" name="Mídia disponível" value="Tenho alguns" data-track> Tenho alguns</label>
+            <label><input type="radio" name="Mídia disponível" value="Não tenho ainda" data-track> Não tenho ainda</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Você tem disponibilidade para filmar conteúdo com orientação da Vórtice? <span class="required">*</span></label>
+          <div class="radio-group">
+            <label><input type="radio" name="Disponibilidade para filmar" value="Sim, consigo filmar" data-track> Sim, consigo filmar</label>
+            <label><input type="radio" name="Disponibilidade para filmar" value="Às vezes" data-track> Às vezes</label>
+            <label><input type="radio" name="Disponibilidade para filmar" value="Prefiro que alguém filme" data-track> Prefiro que alguém filme</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Tem preferência de horário para receber orientações de conteúdo?</label>
+          <input type="text" name="Horário orientações conteúdo" placeholder="Ex: Prefiro à tarde, depois das 14h" data-track>
+        </div>
+        <div class="field-group">
+          <label>Tem algum conteúdo que já performou bem que você quer usar como referência?</label>
+          <textarea name="Conteúdo de referência" placeholder="Ex: O Reel da moto azul que fez 20 mil views. Me manda o link ou descreva..." data-track></textarea>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <span class="alert-icon">🎬</span>
+        <div>
+          <strong>Sobre a produção de vídeo:</strong> A orientação de criativo está inclusa no seu plano. Você filma com o celular, eu direciono o quê e como. Caso queira vídeos com produção mais elaborada (edição profissional, trilha, motion), posso indicar a produtora <strong>Yasmim Farias</strong> — o orçamento seria feito diretamente com ela, à parte.
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 06 SEGMENTAÇÃO ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 06</span>
+        <span class="section-title">Segmentação Geográfica</span>
+      </div>
+      <div class="field-grid single">
+        <div class="field-group">
+          <label>Quais cidades/regiões você quer atingir com os anúncios? <span class="required">*</span></label>
+          <textarea name="Cidades e regiões para anúncios" placeholder="Ex: Balsas-MA e cidades a até 100km de distância. Pode incluir: Carolina, Riachão, Fortaleza dos Nogueiras..." required data-track></textarea>
+        </div>
+        <div class="field-group">
+          <label>Você atende fora de Balsas? (entrega, transferência de moto)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Atendimento fora de Balsas" value="Sim" data-track> Sim</label>
+            <label><input type="radio" name="Atendimento fora de Balsas" value="Não, só local" data-track> Não, só local</label>
+            <label><input type="radio" name="Atendimento fora de Balsas" value="Depende do caso" data-track> Depende do caso</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 07 OBSERVAÇÕES ====== -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-num">// 07</span>
+        <span class="section-title">Observações Finais</span>
+      </div>
+      <div class="field-grid single">
+        <div class="field-group">
+          <label>Tem alguma informação importante que eu devo saber antes de começar?</label>
+          <textarea name="Observações finais" placeholder="Qualquer coisa que ache relevante — restrições, datas importantes, eventos, histórico..." data-track></textarea>
+        </div>
+        <div class="field-group">
+          <label>Melhor horário para nossa call mensal de alinhamento</label>
+          <input type="text" name="Horário call mensal" placeholder="Ex: Toda última terça do mês, às 19h" data-track>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SUBMIT ====== -->
+    <div class="submit-section">
+      <p class="submit-note">
+        Ao enviar, as informações chegam direto para a Vórtice Digital. <strong>Todas as informações são confidenciais</strong> e usadas exclusivamente para estruturar a operação da Sobre Rodas Motos. Dúvidas? Me chama no WhatsApp: <strong>(99) 9 8834-3012</strong>.
+      </p>
+      <button type="submit" class="btn-submit">
+        Enviar Marco Zero →
+      </button>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Marco Zero enviado!</div>
+    <p class="success-sub">Recebi tudo, Rômulo. Vou analisar e já começamos o setup.<br>Qualquer dúvida, me chama no WhatsApp. Vamos juntos! 🚀</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>Vórtice Digital · <span>@vorticeagenciadigital</span> · Balsas-MA · Documento confidencial de onboarding</p>
+  </div>
+</footer>
+
+<script>
+  // PROGRESS BAR
+  const tracked = document.querySelectorAll('[data-track]');
+  const fill = document.getElementById('progress-fill');
+  const pct = document.getElementById('progress-pct');
+
+  function updateProgress() {
+    let filled = 0;
+    tracked.forEach(el => {
+      if (el.type === 'radio' || el.type === 'checkbox') {
+        const name = el.name;
+        if (document.querySelector(`[name="${name}"]:checked`)) filled++;
+      } else if (el.value.trim() !== '') {
+        filled++;
+      }
+    });
+    // Count unique radio groups
+    const radioGroups = [...new Set([...document.querySelectorAll('[data-track][type="radio"]')].map(r => r.name))];
+    const checkedGroups = radioGroups.filter(n => document.querySelector(`[name="${n}"]:checked`)).length;
+    const nonRadio = [...tracked].filter(el => el.type !== 'radio' && el.type !== 'checkbox');
+    const filledNonRadio = nonRadio.filter(el => el.value.trim() !== '').length;
+    const total = nonRadio.length + radioGroups.length;
+    const filledTotal = filledNonRadio + checkedGroups;
+    const p = total > 0 ? Math.round((filledTotal / total) * 100) : 0;
+    fill.style.width = p + '%';
+    pct.textContent = p + '% preenchido';
+  }
+
+  tracked.forEach(el => el.addEventListener('input', updateProgress));
+  tracked.forEach(el => el.addEventListener('change', updateProgress));
+
+  // SHOW/HIDE SITE FIELD
+  document.querySelectorAll('[name="has_site"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('site-field').style.display =
+        document.querySelector('[name="has_site"]:checked')?.value === 'sim' ? 'flex' : 'none';
+    });
+  });
+
+  // SUBMIT — Web3Forms
+  document.getElementById('marco-zero').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = this;
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    // Coleta os dados como objeto JSON
+    const formData = new FormData(form);
+    const object = {};
+    formData.forEach((value, key) => {
+      if (key === 'botcheck') return; // ignora honeypot
+      if (!object[key]) {
+        object[key] = value;
+      } else {
+        // Para campos com mesmo name (múltiplos valores), concatena
+        object[key] = object[key] + ', ' + value;
+      }
+    });
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      });
+
+      const result = await response.json();
+      console.log('Web3Forms result:', result);
+
+      if (result.success) {
+        form.style.display = 'none';
+        document.getElementById('success').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        console.error('Erro Web3Forms:', result);
+        alert('Erro ao enviar: ' + (result.message || 'Tente novamente ou me chama no WhatsApp: (99) 9 8834-3012'));
+        btn.textContent = 'Enviar Marco Zero →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      console.error('Erro de conexão:', err);
+      alert('Erro de conexão. Verifique sua internet e tente novamente.');
+      btn.textContent = 'Enviar Marco Zero →';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
