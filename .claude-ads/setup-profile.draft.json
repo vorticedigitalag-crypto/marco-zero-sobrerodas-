@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "setup-profile",
+  "run_id": "setup-sobre-rodas-20261019",
+  "created_at": "2026-10-19T00:00:00+00:00",
+  "business": {
+    "name": "Sobre Rodas Motos",
+    "business_model": "Concessionária/loja de motos com venda presencial e contato via WhatsApp (a confirmar)",
+    "geographies": ["Balsas, MA, Brasil"],
+    "regulated_categories": []
+  },
+  "objective": {
+    "primary": "A DEFINIR com o cliente (hipótese: gerar leads qualificados de compra de moto via Meta Ads)",
+    "conversion_definition": "A DEFINIR (hipótese: clique/conversa iniciada no WhatsApp)",
+    "success_metrics": ["CPL ou custo por conversa no WhatsApp (meta a definir)", "Vendas atribuídas (a definir)"]
+  },
+  "platforms": ["meta"],
+  "account_refs": [],
+  "data_sources": [
+    {"id": "meta-ads-connector", "kind": "api", "platform": "meta", "status": "unverified"}
+  ],
+  "privacy_class": "confidential",
+  "mutation_authority": "none",
+  "approver_ids": [],
+  "assumptions": [
+    "Plataforma ativa apenas Meta Ads, conforme formulário de onboarding.",
+    "Orçamento mensal, ticket médio, ID do Business Manager e Pixel ainda não informados.",
+    "Financiamento de motos pode exigir revisão de políticas de categorias especiais; confirmar com o cliente.",
+    "Credenciais de Instagram/Facebook coletadas no formulário NUNCA entram neste perfil; use acesso de administrador no Business Manager.",
+    "Aprovador e responsável por rollback pendentes; sem aprovador, nenhuma escrita em conta é autorizada."
+  ],
+  "data_lifecycle": {
+    "schema_version": "1.0.0",
+    "lifecycle_id": "lifecycle-sobre-rodas",
+    "classification": "confidential",
+    "retention": {
+      "minimum_seconds": 0,
+      "mode": "exception",
+      "delete_after": null,
+      "purpose": "Operação de tráfego pago da Sobre Rodas Motos",
+      "exception_reason": "Prazo de retenção e exclusão ainda não definido com o cliente"
+    },
+    "encryption": {"at_rest": "not-applicable", "in_transit": "not-applicable", "evidence_refs": []},
+    "access": {"owner": "Vórtice Digital (a confirmar nome)", "authorized_roles": ["gestor-de-trafego"], "access_log_locator": null},
+    "deletion": {"status": "exception", "method": "A definir", "verification_required": true, "verification_artifact_locator": null},
+    "incident": {"owner": "Vórtice Digital (a confirmar nome)", "reporting_channel": "A definir (canal privado)", "status": "not-triggered", "record_locator": null}
+  }
+}
